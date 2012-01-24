@@ -39,12 +39,14 @@ namespace PasswordEvolution
         const string HASHED_RESULTS_FILE = @"..\..\..\experiments\hashed_results.csv";
         const string FILTERED_MYSPACE_PASSWORDS = @"..\..\..\passwords\myspace-filtered-withcount.txt";
         const int VALIDATION_GUESSES = 10000;// = 1000000000;
-        const int MAX_GENERATIONS = 10;//= 200;
+        const int MAX_GENERATIONS = 20;//= 200;
 
         const string PHPBB_DATASET = @"..\..\..\passwords\phpbb-withcount.txt";
         const string PHPBB_SEED_FILE = @"..\..\..\experiments\phpbb_seed.xml";
         const string PHPBB_CONFIG_FILE = @"..\..\..\experiments\mini-project.config.xml";
         const string PHPBB_RESULTS_FILE = @"..\..\..\experiments\phpbb_results.csv";
+
+        //static int passwordDictionaryLock = 0;
 
         ////
         //static HashSet<string> crackedPasswords;
@@ -211,11 +213,11 @@ namespace PasswordEvolution
                     
                     /* Remove words from the dictionary at the end of the generation */
                    
-                      /*  foreach (string p in _experiment.Evaluator.FoundPasswords)
-                        {
-                            PasswordCrackingEvaluator.Passwords.Remove(p);
-                              _experiment.Passwords.Remove(p);
-                        }*/
+                        //foreach (string p in _experiment.Evaluator.FoundPasswords)
+                        //{
+                        //    PasswordCrackingEvaluator.Passwords.Remove(p);
+                        //    //  _experiment.Passwords.Remove(p);
+                        //}
                     
                 }
                 Console.WriteLine("Done.");
@@ -237,7 +239,7 @@ namespace PasswordEvolution
             //}
 
             _gens++;
-
+            //Program.passwordDictionaryLock = 0;
         }
 
         #region Code to run the static model comparison of first-order vs. layered

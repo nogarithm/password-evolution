@@ -245,6 +245,7 @@ namespace SharpNeat.EvolutionAlgorithms
 
         private void AlgorithmThreadMethod()
         {
+            Console.WriteLine("In AlgorithmThreadMethod()!!");
             try
             {
                 _prevUpdateGeneration = 0;
@@ -252,9 +253,21 @@ namespace SharpNeat.EvolutionAlgorithms
 
                 for(;;)
                 {
+                    //
+                    while (Program.passwordDictionaryLock == 1)
+                    {
+                        Thread.Sleep(1000);
+                        Console.WriteLine("Sleeping");
+                    }
+                    //
+
                     _currentGeneration++;
                     PerformOneGeneration();
 
+                    //
+                    Program.passwordDictionartLock = 1;
+                    Console.WriteLine("Lock = 1");
+                    //
                     if(UpdateTest())
                     {
                         _prevUpdateGeneration = _currentGeneration;
